@@ -1,5 +1,4 @@
-// 3. Faça um programa que leia uma matriz A 5x5 e imprima
-// sua diagonal secundária.
+
 
 #include <stdio.h>
 
@@ -8,9 +7,16 @@ void main (){
     for (i = 0; i < 5; i++)
         for (j = 0; j< 5; j++)
             scanf("%d", &matrix[i][j]);
-    
-
-
-
-
+    for (i = 0; i < 5; i++){
+        for (j = 0; j< 5; j++)
+            printf("%d ", matrix[i][j]);
+    putchar('\n');
+    }
+    j = 0;
+    for (i = 4; i >= 0; i--)
+        while(j < 5){
+            printf("%d ", matrix[i][j]);
+            j++;
+            break;
+    }
 }
