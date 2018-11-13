@@ -15,19 +15,15 @@ int isin(int *a, int n, int b){
     return 0;
 }
 // aqui falta um quick sort
-int* quicksort(int *a){
-
-
-}
 
 int* uniao(int *x1, int *x2, int n1, int n2, int* qtd){
     int tamanho = 0, i, j, *paux = malloc(sizeof(int) * (n1 + n2));
-    for (i = 0; i < 5; i++){
+    for (i = 0; i < n1; i++){
         paux[i] = x1[i];
         tamanho++;
     }
     j = i;
-    for (i = 0; i < 5; i++){
+    for (i = 0; i < n2; i++){
         if (isin(x1, n1, x2[i]) == 0){
             paux[j] = x2[i];
             j++;
@@ -45,16 +41,16 @@ int* uniao(int *x1, int *x2, int n1, int n2, int* qtd){
 }
 
 int main (){
-    int x1[] = {1, 3, 5, 6, 7}, x2[] = {1, 3, 4, 6, 8};
     int n1, n2, *teste, *qtd;
-    //printf("Digite aqui o tamanho dos vetores: ");
-    //scanf("%d%d", &n1, &n2);
-    teste = uniao(x1, x2, 5, 5, qtd);
+    printf("Digite aqui o tamanho dos vetores: ");
+    scanf("%d%d", &n1, &n2);
+    int x1[n1], x2[n2];
+    teste = uniao(x1, x2, n1, n2, qtd);
     printf("[%d]\n", *qtd);
     for (int i = 0; i < *qtd; i++){
         printf("%d\n", teste[i]);
     }
     free(teste);
-    // falta generalizar o codigo
+    // falta agora ordenar o vetor
     return 0;
 }
