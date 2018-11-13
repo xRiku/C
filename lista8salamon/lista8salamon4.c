@@ -19,7 +19,7 @@ int main (){
     printf("Digite aqui o numero maximo de nomes: ");
     while(1){
         scanf("%d", &n);
-        if (n != 0)
+        if (n > 0)
             break;
         printf("O numero deve ser maior que 0\n");
     }
@@ -27,7 +27,6 @@ int main (){
     for (i = 0; i < n; i++){
         pN[i] = malloc(sizeof(char)*30);
         pNe[i] = malloc(sizeof(char)*30);
-        //scanf(" %29[^\n]", pN[i]);
     }
     while(1){
         printf("\t MENU\n");
@@ -64,10 +63,8 @@ int main (){
                         if (strcmp(string, pN[i]) == 0){
                             x++;
                             printf("Digite um nome para sobrepor '%s'\n", pN[i]);
-                            pNe[i] = pN[i];
-                             printf("%p - > %s \n%p ->  %s\n", &pNe[i], pNe[i], &pN[i], pN[i]);
+                            strcpy(pNe[i],pN[i]);
                             scanf(" %29[^\n]", pN[i]);
-                            printf("%p - > %s \n%p ->  %s\n", &pNe[i], pNe[i], &pN[i], pN[i]);
                         }
                     }
                     if (x == 0)
@@ -79,7 +76,7 @@ int main (){
                         scanf(" %29[^\n]", string);
                         for (i = 0; i < n; i++){
                             if (strcmp(string, pN[i]) == 0){
-                                pNe[i] = pN[i];
+                                strcpy(pNe[i],pN[i]);
                                 pN[i] = " ";
                             }
                         }
@@ -91,7 +88,10 @@ int main (){
                             pN[linha - 1] = pNe[linha - 1];
                         }
                         else{
-                            printf("Resposta invalida\nAlternativa nao existe\n");
+                            if (resposta == '0')
+                                break;
+                            else
+                                printf("Resposta invalida\nAlternativa nao existe\n");
                         }
                     }
                 }
@@ -100,8 +100,12 @@ int main (){
         for (i = 0; i < n; i++){
             printf("- %s\n", pN[i]);
         }
-        if (reposta = '0')
-        break;
     }
+    for (i = 0; i < n; i++){
+        free(pN[i]);
+        free(pNe[i]);
+    }
+    free(pN);
+    free(pNe);
     return 0;
 }
