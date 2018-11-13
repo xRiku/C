@@ -14,12 +14,19 @@ nome;
 #include <string.h>
 
 int main (){
-    int n, i, j, linha;
+    int i, j, linha, x = 0;
+    unsigned int n;
     printf("Digite aqui o numero maximo de nomes: ");
-    scanf("%d", &n);
-    char string[30], resposta, **pN = malloc(sizeof(char*) * n);
+    while(1){
+        scanf("%d", &n);
+        if (n != 0)
+            break;
+        printf("O numero deve ser maior que 0\n");
+    }
+    char string[30], resposta, **pN = malloc(sizeof(char*) * n), **pNe = malloc(sizeof(char*) * n);
     for (i = 0; i < n; i++){
         pN[i] = malloc(sizeof(char)*30);
+        pNe[i] = malloc(sizeof(char)*30);
         //scanf(" %29[^\n]", pN[i]);
     }
     while(1){
@@ -33,30 +40,68 @@ int main (){
         scanf(" %c", &resposta);
         if (resposta == 'a' || resposta == 'A'){
             printf("Digite aqui em qual linha deseja colocar o novo nome:");
-            scanf("%d", &linha);
+            while(1){
+                scanf("%d", &linha);
+                if (linha <= n)
+                    break;
+                printf("Linha invalida\nDigite outra linha\n");
+            }
             printf("Digite aqui o nome a ser colocado: ");
             scanf(" %29[^\n]", pN[linha-1]);
         }
-        if (resposta == 'b' || resposta == 'B'){
-            printf("Digite aqui de qual linha deseja excluir o nome:");
-            scanf("%d", &linha);
-            pN[linha-1] = " ";
-        }
-        if (resposta == 'c' || resposta == 'C'){
-            printf("Informe o nome a ser substituido:");
-            scanf(" %29[^\n]", string);
-            for (i = 0; i < n; i++){
-                if (strcmp(string, pN[i])){
-                    printf("Digite um nome para sobrepor '%s'\n", pN[i]);
-                    scanf(" %29[^\n]", pN[i]);
+        else{
+            if (resposta == 'b' || resposta == 'B'){
+                printf("Digite aqui de qual linha deseja excluir o nome:");
+                scanf("%d", &linha);
+                pNe[linha-1] = pN[linha-1];
+                pN[linha-1] = " ";
+            }
+            else{
+                if (resposta == 'c' || resposta == 'C'){
+                    printf("Informe o nome a ser substituido:");
+                    scanf(" %29[^\n]", string);
+                    for (i = 0; i < n; i++){
+                        if (strcmp(string, pN[i]) == 0){
+                            x++;
+                            printf("Digite um nome para sobrepor '%s'\n", pN[i]);
+                            pNe[i] = pN[i];
+                             printf("%p - > %s \n%p ->  %s\n", &pNe[i], pNe[i], &pN[i], pN[i]);
+                            scanf(" %29[^\n]", pN[i]);
+                            printf("%p - > %s \n%p ->  %s\n", &pNe[i], pNe[i], &pN[i], pN[i]);
+                        }
+                    }
+                    if (x == 0)
+                        printf("O nome não se encontra na lista\n");
+                }
+                else{
+                    if (resposta == 'd' || resposta == 'D'){
+                        printf("Informe o nome a ser APAGADO:");
+                        scanf(" %29[^\n]", string);
+                        for (i = 0; i < n; i++){
+                            if (strcmp(string, pN[i]) == 0){
+                                pNe[i] = pN[i];
+                                pN[i] = " ";
+                            }
+                        }
+                    }
+                    else{
+                        if (resposta == 'e' || resposta == 'E'){
+                            printf("Digite aqui a linha para recuperar o nome: ");
+                            scanf("%d", &linha);
+                            pN[linha - 1] = pNe[linha - 1];
+                        }
+                        else{
+                            printf("Resposta invalida\nAlternativa nao existe\n");
+                        }
+                    }
                 }
             }
         }
         for (i = 0; i < n; i++){
             printf("- %s\n", pN[i]);
         }
+        if (reposta = '0')
+        break;
     }
-
-
-
+    return 0;
 }
