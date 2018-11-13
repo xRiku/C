@@ -8,6 +8,9 @@ c) Crie dinamicamente e construa a matriz transposta M x N de inteiros.*/
 
 int main (){
     int n, m, i, j, auxi, auxj, auxi2, auxj2, auxi3, auxj3, maior, maior2, maior3;
+    auxi = auxj = auxi2 = auxi3 = 0;
+    auxj2 = 1;
+    auxj3 = 2;
     printf("Digite aqui as dimensões da matriz N x M:");
     scanf("%d%d", &n, &m);
     int **pN = malloc(sizeof(int*)*n);
@@ -17,10 +20,10 @@ int main (){
             scanf("%d", &pN[i][j]);
         }
     }
-    maior = maior2 = maior3 = pN[0][0];
+    maior = pN[0][0];
     for (i = 0; i < n; i++){
         for(j = 0; j < m; j++){
-            printf(" %d", pN[i][j]);
+            printf("%d ", pN[i][j]);
             if (maior < pN[i][j]){
                 maior = pN[i][j];
                 auxi = i;
@@ -31,13 +34,14 @@ int main (){
     }
     for (i = 0; i < n; i++){
         for(j = 0; j < m; j++){
-            printf("%d\n", maior2);
-            if (maior2 < pN[i][j] && (pN[i][j] != pN[auxi][auxj])){
+            if (i == 0 & j == 0 && maior == pN[0][0]){
+                maior2 == pN[0][1];
+            }
+            if (maior2 < pN[i][j] && pN[i][j] != pN[auxi][auxj]){
                 maior2 = pN[i][j];
                 auxi2 = i;
                 auxj2 = j;
             }
-            printf("[%d]\n", maior2);
         }
     }
     for (i = 0; i < n; i++){
@@ -49,8 +53,12 @@ int main (){
             }
         }
     }
-    printf("Primeiro maior: %d \nLinha: \t%d\nColuna \t%d\n", maior, auxi + 1, auxj + 1);
-    printf("Segundo maior: %d \nLinha: \t%d\nColuna \t%d\n", maior2, auxi2 + 1, auxj2 + 1);
-    printf("Segundo maior: %d \nLinha: \t%d\nColuna \t%d\n", maior3, auxi3 + 1, auxj3 + 1);
+    printf("Primeiro maior: %d \nLinha: \t\t%d\nColuna: \t%d\n", maior, auxi + 1, auxj + 1);
+    printf("Segundo maior: %d \nLinha: \t\t%d\nColuna: \t%d\n", maior2, auxi2 + 1, auxj2 + 1);
+    printf("Segundo maior: %d \nLinha: \t\t%d\nColuna: \t%d\n", maior3, auxi3 + 1, auxj3 + 1);
+    for (i = 0; i < n; i++){
+        free(pN[i]);
+    }
+    free(pN);
     return 0;
 }

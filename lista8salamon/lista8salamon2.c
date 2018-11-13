@@ -30,11 +30,9 @@ void main (){
     }
     //Não consigo explicar o comportamento dessa string(?) o simbolo '\n' não termina a string com '\0';
     for (i = 0; i < strlen(string); i++){
-        //printf("%d - > %c\n", i, *(string+i));
         if (isvogal(*(string+i)) == 0)
             printf("%c", *(string+i));
     }
-    //printf("[%d]\n", i);
-    printf("%s\n", string);
+    //printf("%s\n", string);
     free(string);
 }
