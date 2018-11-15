@@ -48,7 +48,7 @@ int* interseccao(int *x1, int *x2, int n1, int n2, int* qtd){
 
 }
 int main (){
-    int i, n1, n2, *teste, qtd;
+    int i, n1, n2, *teste, qtd, contador = 0;
     printf("Digite aqui o tamanho dos vetores: ");
     scanf("%d%d", &n1, &n2);
     int *x1 = malloc (sizeof(int)* n1), *x2 = malloc (sizeof(int)* n2);
@@ -63,11 +63,14 @@ int main (){
     teste = interseccao(x1, x2, n1, n2, &qtd);
     printf("[%d]\n", qtd);
     for (int i = 0; i < qtd; i++){
-        printf("%d\n", teste[i]);
+        if (isin(teste, qtd, teste[i])){
+            contador++;
+            printf("%d\n", teste[i]);
+        }
     }
     free(teste);
     free(x1);
     free(x2);
-    // falta agora ordenar o vetor
+    // Falta agora ordenar o vetor e retirar os numeros repetidos
     return 0;
 }
