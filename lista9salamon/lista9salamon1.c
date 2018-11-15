@@ -21,7 +21,6 @@ int* uniao(int *x1, int *x2, int n1, int n2, int* qtd){
     for (i = 0; i < n1; i++){
         paux[i] = x1[i];
         tamanho++;
-        printf("[%d]\n", paux[i]);
     }
     j = i;
     for (i = 0; i < n2; i++){
@@ -29,7 +28,6 @@ int* uniao(int *x1, int *x2, int n1, int n2, int* qtd){
             paux[j] = x2[i];
             j++;
             tamanho++;
-            printf("[%d]  [%d]\n", paux[j], x2[i]);
         }
     }
     *qtd = tamanho;
@@ -43,26 +41,26 @@ int* uniao(int *x1, int *x2, int n1, int n2, int* qtd){
 }
 
 int main (){
-    int i, n1, n2, *teste, *qtd;
+    int i, n1, n2, *teste, qtd;
     printf("Digite aqui o tamanho dos vetores: ");
     scanf("%d%d", &n1, &n2);
     int *x1 = malloc(sizeof(int)*n1), *x2 = malloc(sizeof(int) * n2);
     puts("Vetor 1:");
-    printf("%d\n", n1);
     for (i = 0; i < n1; i++){
-        printf("*%d*\n", i);
         scanf("%d", &x1[i]);
     }
     puts("Vetor 2");
     for (i = 0; i < n2; i++){
         scanf("%d", &x2[i]);
     }
-    teste = uniao(x1, x2, n1, n2, qtd);
-    printf("[%d]\n", *qtd);
-    for (i = 0; i < *qtd; i++){
+    teste = uniao(x1, x2, n1, n2, &qtd);
+    printf("[%d]\n", qtd);
+    for (i = 0; i < qtd; i++){
         printf("%d\n", teste[i]);
     }
     free(teste);
+    free(x1);
+    free(x2);
     // falta agora ordenar o vetor
     return 0;
 }
