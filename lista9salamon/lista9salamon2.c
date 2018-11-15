@@ -19,9 +19,10 @@ int* interseccao(int *x1, int *x2, int n1, int n2, int* qtd){
     int tamanho = 0, i, j, *paux;
     if (n1 <= n2){
         paux = malloc (sizeof(int)*n2);
-        for (i = 0; i < n2; i++){
-            if (isin(x1, n1, x2[i])){
-                paux[j] = x2[i];
+        for (i = 0; i < n1; i++){
+            if (isin(x2, n2, x1[i])){
+                paux[j] = x1[i];
+                printf("%d -> %d\n", paux[j], i);
                 tamanho++;
                 j++;
             }
@@ -29,10 +30,11 @@ int* interseccao(int *x1, int *x2, int n1, int n2, int* qtd){
     }
     else{
         paux = malloc (sizeof(int)*n1);
-        for (i = 0; i < n1; i++){
-            if (isin(x2, n2, x1[i])){
-                paux[i] = x1[i];
+        for (i = 0; i < n2; i++){
+            if (isin(x1, n1, x2[i])){
+                paux[j] = x2[i];
                 tamanho++;
+                j++;
             }
         }
     }
@@ -54,11 +56,11 @@ int main (){
     for (i = 0; i < n1; i++){
         scanf("%d", &x1[i]);
     }
-    puts("Vetor 2");
+    puts("Vetor 2:");
     for (i = 0; i < n2; i++){
         scanf("%d", &x2[i]);
     }
-    teste = interseccao(x1, x2, 5, 5, &qtd);
+    teste = interseccao(x1, x2, n1, n2, &qtd);
     printf("[%d]\n", qtd);
     for (int i = 0; i < qtd; i++){
         printf("%d\n", teste[i]);
